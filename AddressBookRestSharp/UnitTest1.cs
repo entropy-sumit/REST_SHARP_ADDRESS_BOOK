@@ -83,21 +83,31 @@ namespace AddressBookRestSharp
         //        Console.WriteLine(response.Content);
         //    }
         //}
-        [TestMethod]
-        public void OnCallingPutAPI_ReturnEmployeeObject()
-        {
-            RestRequest request = new RestRequest("/AddressBookJson/7", Method.PUT);
-            JsonObject jsonObj = new JsonObject();
-            jsonObj.Add("FirstName", "shivam");
+        //[TestMethod]
+        //public void OnCallingPutAPI_ReturnEmployeeObject()
+        //{
+        //    RestRequest request = new RestRequest("/AddressBookJson/7", Method.PUT);
+        //    JsonObject jsonObj = new JsonObject();
+        //    jsonObj.Add("FirstName", "shivam");
 
-            request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
+        //    request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
+
+        //    IRestResponse response = client.Execute(request);
+
+        //    Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+        //    AddressBook addressBook = JsonConvert.DeserializeObject<AddressBook>(response.Content);
+        //    Assert.AreEqual("FirstName", addressBook.FirstName);
+
+        //    Console.WriteLine(response.Content);
+        //}
+        [TestMethod]
+        public void OnCallingDeleteAPI_ReturnSuccessStatus()
+        {
+            RestRequest request = new RestRequest("/AddressBookJson/9", Method.DELETE);
 
             IRestResponse response = client.Execute(request);
 
-            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-            AddressBook addressBook = JsonConvert.DeserializeObject<AddressBook>(response.Content);
-            Assert.AreEqual("FirstName", addressBook.FirstName);
-
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Console.WriteLine(response.Content);
         }
     }
