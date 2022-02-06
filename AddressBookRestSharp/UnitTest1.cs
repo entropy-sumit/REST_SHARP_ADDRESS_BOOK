@@ -50,38 +50,55 @@ namespace AddressBookRestSharp
         //        Console.WriteLine("id: " + address.id + "\t" + "Firstname: " + address.FirstName + "\t" + "LastName: " + address.LastName + "\t" + "Address:" + address.Address + "\t" + "City:" + address.City + "\t" + "State:" + address.State + "\t" + "ZipCode:" + address.ZipCode + "\t" + "PhoneNumber:" + address.PhoneNumber + "\t" + "Email:" + address.Email);
         //    }
         //}
+        //[TestMethod]
+        //public void OnCallingPostAPIForAddressBookListWithMultipleAdrress_ReturnAddressBookObject()
+        //{
+        //    List<AddressBook> addressbookList = new List<AddressBook>();
+        //    addressbookList.Add(new AddressBook { FirstName = "dipu", LastName = "rawat", Address = "lakhesra", City = "gorakhpur", State = "uttar pradesh", ZipCode = "956588", PhoneNumber = "98555228988", Email = "dipuraw@gamil.com" });
+
+        //    foreach (var address in addressbookList)
+        //    {
+
+        //        RestRequest request = new RestRequest("/AddressBookJson", Method.POST);
+        //        JsonObject jsonObj = new JsonObject();
+        //        jsonObj.Add("FirstName", address.FirstName);
+        //        jsonObj.Add("LastName", address.LastName);
+        //        jsonObj.Add("Addresss", address.Address);
+        //        jsonObj.Add("City", address.City);
+        //        jsonObj.Add("State", address.State);
+        //        jsonObj.Add("ZipCode", address.ZipCode);
+        //        jsonObj.Add("PhoneNumber", address.PhoneNumber);
+        //        jsonObj.Add("Email", address.Email);
+
+
+        //        request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
+        //        IRestResponse response = client.Execute(request);
+
+        //        Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+        //        AddressBook addressBook = JsonConvert.DeserializeObject<AddressBook>(response.Content);
+        //        Assert.AreEqual(address.FirstName, addressBook.FirstName);
+        //        Assert.AreEqual(address.LastName, addressBook.LastName);
+
+
+        //        Console.WriteLine(response.Content);
+        //    }
+        //}
         [TestMethod]
-        public void OnCallingPostAPIForAddressBookListWithMultipleAdrress_ReturnAddressBookObject()
+        public void OnCallingPutAPI_ReturnEmployeeObject()
         {
-            List<AddressBook> addressbookList = new List<AddressBook>();
-            addressbookList.Add(new AddressBook { FirstName = "dipu", LastName = "rawat", Address = "lakhesra", City = "gorakhpur", State = "uttar pradesh", ZipCode = "956588", PhoneNumber = "98555228988", Email = "dipuraw@gamil.com" });
+            RestRequest request = new RestRequest("/AddressBookJson/7", Method.PUT);
+            JsonObject jsonObj = new JsonObject();
+            jsonObj.Add("FirstName", "shivam");
 
-            foreach (var address in addressbookList)
-            {
+            request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
 
-                RestRequest request = new RestRequest("/AddressBookJson", Method.POST);
-                JsonObject jsonObj = new JsonObject();
-                jsonObj.Add("FirstName", address.FirstName);
-                jsonObj.Add("LastName", address.LastName);
-                jsonObj.Add("Addresss", address.Address);
-                jsonObj.Add("City", address.City);
-                jsonObj.Add("State", address.State);
-                jsonObj.Add("ZipCode", address.ZipCode);
-                jsonObj.Add("PhoneNumber", address.PhoneNumber);
-                jsonObj.Add("Email", address.Email);
+            IRestResponse response = client.Execute(request);
 
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            AddressBook addressBook = JsonConvert.DeserializeObject<AddressBook>(response.Content);
+            Assert.AreEqual("FirstName", addressBook.FirstName);
 
-                request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-
-                Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
-                AddressBook addressBook = JsonConvert.DeserializeObject<AddressBook>(response.Content);
-                Assert.AreEqual(address.FirstName, addressBook.FirstName);
-                Assert.AreEqual(address.LastName, addressBook.LastName);
-
-
-                Console.WriteLine(response.Content);
-            }
+            Console.WriteLine(response.Content);
         }
     }
 }
